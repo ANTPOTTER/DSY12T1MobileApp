@@ -32,11 +32,12 @@
             align-items: center;
             font-size: 16px;
             padding: 20px;
+            overflow-y: auto;
         }
         .bottom-bar {
             display: flex;
             justify-content: space-around;
-            background: blue;
+            background: #007bff;
             padding: 10px 0;
         }
         .bottom-bar a {
@@ -61,8 +62,11 @@
     </style>
     <script>
         function setActive(menuId, content) {
+            // Remove active class from all menu items
             document.querySelectorAll('.bottom-bar a').forEach(el => el.classList.remove('active'));
+            // Add active class to clicked menu item
             document.getElementById(menuId).classList.add('active');
+            // Update content based on the selected menu
             document.getElementById('content').innerHTML = content;
         }
     </script>
@@ -70,22 +74,46 @@
 <body>
     <div class="phone-frame">
         <div class="content" id="content">
+            <!-- Default content (Main Menu) -->
             <h2>Main Menu</h2>
             <p>Number of Food Safety Complaints: 12</p>
             <p>Inspections Due: 5</p>
             <p>Compliance Rate: 89%</p>
         </div>
         <div class="bottom-bar">
+            <!-- Main Menu Button -->
             <a href="#" id="mainMenu" class="active" onclick="setActive('mainMenu', '<h2>Main Menu</h2><p>Number of Food Safety Complaints: 12</p><p>Inspections Due: 5</p><p>Compliance Rate: 89%</p>')">
                 ⏹
             </a>
-            <a href="#" id="notifications" onclick="setActive('notifications', '<h2>Upcoming Inspections</h2><p>Restaurant: McDonald\'s - Due: Feb 25</p><p>Restaurant: KFC - Due: Mar 3</p><h2>Safety Violations</h2><p>Rodent Activity Reported at Subway</p>')">
+            <!-- Notifications Button -->
+            <a href="#" id="notifications" onclick="setActive('notifications', `
+                <h2>Upcoming Inspections</h2>
+                <p>Restaurant: McDonald\'s - Due: Feb 25</p>
+                <p>Restaurant: KFC - Due: Mar 3</p>
+                <h2>Safety Violations</h2>
+                <p>Rodent Activity Reported at Subway</p>
+                <p>Late Trash Disposal at Burger King</p> 
+            `)">
                 🔔
             </a>
-            <a href="#" id="search" onclick="setActive('search', '<h2>Search Results</h2><div><strong>McDonald\'s</strong><br>123 Main St<br>Fast food with drive-thru service.<br>⭐⭐⭐⭐⭐</div><div><strong>KFC</strong><br>456 Side St<br>Fried chicken and sides.<br>⭐⭐⭐⭐</div><div><strong>Subway</strong><br>789 Cross Rd<br>Fresh sandwiches.<br>⭐⭐⭐</div>')">
+            <!-- Search Button -->
+            <a href="#" id="search" onclick="setActive('search', `
+                <h2>Search Results</h2>
+                <div><strong>McDonald\'s</strong><br>123 Main St<br>Fast food with drive-thru service.<br>⭐⭐⭐⭐⭐</div>
+                <div><strong>KFC</strong><br>456 Side St<br>Fried chicken and sides.<br>⭐⭐⭐⭐</div>
+                <div><strong>Subway</strong><br>789 Cross Rd<br>Fresh sandwiches.<br>⭐⭐⭐</div>
+            `)">
                 🔍
             </a>
-            <a href="#" id="profile" onclick="setActive('profile', '<img src=\"default-profile.png\" style=\"width:100px; height:100px; border-radius:50%;\"><h2>Restaurant Name</h2><p>123 Example Ave</p><p>⭐⭐⭐⭐☆</p>')">
+            <!-- Profile Button -->
+            <a href="#" id="profile" onclick="setActive('profile', `
+                <img src="default-profile.png" style="width:100px; height:100px; border-radius:50%;"><h2>Restaurant Profile</h2>
+                <p>Name: McDonald\'s</p>
+                <p>Location: 123 Main St</p>
+                <p>Rating: ⭐⭐⭐⭐⭐</p>
+                <h3>Details</h3>
+                <p>Fast food with drive-thru service. Known for burgers and fries.</p>
+            `)">
                 👤
             </a>
         </div>
