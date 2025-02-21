@@ -62,12 +62,14 @@
         }
         .gauge-container {
             display: flex;
-            justify-content: space-around;
+            flex-direction: column;
+            align-items: center;
             width: 100%;
         }
         canvas {
             width: 100px !important;
             height: 100px !important;
+            margin: 20px 0;
         }
     </style>
     <script>
@@ -121,7 +123,7 @@
 <body>
     <div class="phone-frame">
         <div class="content" id="content">
-            <!-- Default content: Main Menu with gauges -->
+            <!-- Default content: Main Menu with vertical gauges -->
             <h2>Main Menu</h2>
             <div class="gauge-container">
                 <div>
@@ -139,7 +141,7 @@
             </div>
         </div>
         <div class="bottom-bar">
-            <!-- Menu buttons with onclick events to load content -->
+            <!-- Bottom bar buttons, no text, only icons to navigate -->
             <a href="#" id="mainMenu" class="active" onclick="setActive('mainMenu', `
                 <h2>Main Menu</h2>
                 <div class='gauge-container'>
@@ -156,7 +158,7 @@
                         <canvas id='complianceGauge'></canvas>
                     </div>
                 </div>
-            `)">⏹</a>
+            `)">🏠</a>
             <a href="#" id="notifications" onclick="setActive('notifications', `
                 <h2>Upcoming Inspections</h2>
                 <p><strong>McDonald\'s</strong> - Due: Feb 25</p>
