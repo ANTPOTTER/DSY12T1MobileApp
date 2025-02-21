@@ -41,6 +41,7 @@
             justify-content: space-around;
             background-color: #007bff;
             padding: 10px 0;
+            position: relative;
         }
         .bottom-bar a {
             text-decoration: none;
@@ -67,9 +68,9 @@
             width: 100%;
         }
         canvas {
-            width: 100px !important;
-            height: 100px !important;
-            margin: 20px 0;
+            width: 80px !important;
+            height: 80px !important;
+            margin: 10px 0;
         }
     </style>
     <script>
@@ -141,7 +142,7 @@
             </div>
         </div>
         <div class="bottom-bar">
-            <!-- Bottom bar buttons, no text, only icons to navigate -->
+            <!-- Bottom bar buttons with icons only, no text -->
             <a href="#" id="mainMenu" class="active" onclick="setActive('mainMenu', `
                 <h2>Main Menu</h2>
                 <div class='gauge-container'>
