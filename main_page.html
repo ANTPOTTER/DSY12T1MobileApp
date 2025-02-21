@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Project App Wireframe</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             margin: 0;
@@ -59,6 +60,15 @@
             background-color: black;
             color: white;
         }
+        .gauge-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        canvas {
+            width: 100px !important;
+            height: 100px !important;
+        }
     </style>
     <script>
         function setActive(menuId, content) {
@@ -67,24 +77,85 @@
             document.getElementById(menuId).classList.add('active');
             document.getElementById('content').innerHTML = content;
         }
+
+        function createGaugeChart(id, value, max) {
+            var ctx = document.getElementById(id).getContext('2d');
+            var gaugeChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Progress', 'Remaining'],
+                    datasets: [{
+                        data: [value, max - value],
+                        backgroundColor: ['#4caf50', '#e0e0e0'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    cutoutPercentage: 80,
+                    rotation: Math.PI,
+                    circumference: Math.PI,
+                    responsive: true,
+                    animation: {
+                        animateRotate: true
+                    },
+                    plugins: {
+                        tooltip: {
+                            enabled: false
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = function() {
+            // Create gauge charts on page load
+            createGaugeChart('complaintsGauge', 12, 50); // Example: 12 out of 50 complaints
+            createGaugeChart('inspectionsGauge', 5, 10); // Example: 5 out of 10 inspections
+            createGaugeChart('complianceGauge', 89, 100); // Example: 89% compliance
+        };
     </script>
 </head>
 <body>
     <div class="phone-frame">
         <div class="content" id="content">
-            <!-- Default content: Main Menu -->
+            <!-- Default content: Main Menu with gauges -->
             <h2>Main Menu</h2>
-            <p>Number of Food Safety Complaints: 12</p>
-            <p>Inspections Due: 5</p>
-            <p>Compliance Rate: 89%</p>
+            <div class="gauge-container">
+                <div>
+                    <h3>Food Safety Complaints</h3>
+                    <canvas id="complaintsGauge"></canvas>
+                </div>
+                <div>
+                    <h3>Inspections Due</h3>
+                    <canvas id="inspectionsGauge"></canvas>
+                </div>
+                <div>
+                    <h3>Compliance Rate</h3>
+                    <canvas id="complianceGauge"></canvas>
+                </div>
+            </div>
         </div>
         <div class="bottom-bar">
             <!-- Menu buttons with onclick events to load content -->
             <a href="#" id="mainMenu" class="active" onclick="setActive('mainMenu', `
                 <h2>Main Menu</h2>
-                <p>Number of Food Safety Complaints: 12</p>
-                <p>Inspections Due: 5</p>
-                <p>Compliance Rate: 89%</p>
+                <div class='gauge-container'>
+                    <div>
+                        <h3>Food Safety Complaints</h3>
+                        <canvas id='complaintsGauge'></canvas>
+                    </div>
+                    <div>
+                        <h3>Inspections Due</h3>
+                        <canvas id='inspectionsGauge'></canvas>
+                    </div>
+                    <div>
+                        <h3>Compliance Rate</h3>
+                        <canvas id='complianceGauge'></canvas>
+                    </div>
+                </div>
             `)">⏹</a>
             <a href="#" id="notifications" onclick="setActive('notifications', `
                 <h2>Upcoming Inspections</h2>
@@ -92,7 +163,6 @@
                 <p><strong>KFC</strong> - Due: Mar 3</p>
                 <h2>Safety Violations</h2>
                 <p>Rodent Activity Reported at <strong>Subway</strong></p>
-                <p>Late Trash Disposal at <strong>Burger King</strong></p>
             `)">🔔</a>
             <a href="#" id="search" onclick="setActive('search', `
                 <h2>Search Results</h2>
