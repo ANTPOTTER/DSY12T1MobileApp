@@ -35,32 +35,39 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 10px;
+            border: 2px solid white;
+            border-radius: 8px;
+            width: 80px;
+            text-align: center;
         }
-        .icon {
-            font-size: 24px;
+        .bottom-bar a.active {
+            background: white;
+            color: black;
         }
     </style>
+    <script>
+        function setActive(menuId) {
+            document.querySelectorAll('.bottom-bar a').forEach(el => el.classList.remove('active'));
+            document.getElementById(menuId).classList.add('active');
+        }
+    </script>
 </head>
 <body>
-    <div class="content">Main Content Area</div>
+    <div class="content" id="content">Main Menu Content</div>
     <div class="bottom-bar">
-        <a href="#" id="mainMenu">
-            <div class="icon">📊</div>
-            Main Menu
+        <a href="#" id="mainMenu" class="active" onclick="setActive('mainMenu'); document.getElementById('content').innerText='Main Menu Content';">
+            📊<br>Main Menu
         </a>
-        <a href="#" id="notifications">
-            <div class="icon">🔔</div>
-            Notifications
+        <a href="#" id="notifications" onclick="setActive('notifications'); document.getElementById('content').innerText='Notifications Content';">
+            🔔<br>Notifications
         </a>
-        <a href="#" id="search">
-            <div class="icon">🔍</div>
-            Search
+        <a href="#" id="search" onclick="setActive('search'); document.getElementById('content').innerText='Search Menu Content';">
+            🔍<br>Search
         </a>
-        <a href="#" id="profile">
-            <div class="icon">👤</div>
-            Profile
+        <a href="#" id="profile" onclick="setActive('profile'); document.getElementById('content').innerText='Profile Content';">
+            👤<br>Profile
         </a>
     </div>
 </body>
 </html>
-
